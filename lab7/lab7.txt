@@ -1,0 +1,75 @@
+#include<stdlib.h>
+
+struct number
+{
+  int data;
+  struct number *next;
+};
+
+void create(struct number **q)
+{
+  struct number *r,*t;
+  int cnt,i,dat;
+  printf("How many number?");
+  scanf("%d",&cnt);
+  for(i=0;i<cnt;i++)
+    {
+       printf("Enter the number %d  ",i);
+       scanf("%d",&dat);
+       r=(struct number *) malloc (sizeof(struct number));
+       r->data=dat;
+       r->next=NULL;
+
+       if(*q==NULL)
+       {
+         *q=r;
+       }
+      else
+       {
+         t=*q;
+         while(t->next!=NULL)
+           {
+             t=t->next;
+           }
+         t->next=r;
+       }
+    }
+}
+
+void display(struct number **q)
+{
+  struct number *r;
+  r=*q;
+  while(r!=NULL)
+    {
+      printf("%d->",r->data);
+      r=r->next;
+    }
+  printf("\n");
+}
+
+void max(struct number **q)
+{
+  struct number *r;
+  int max=0;
+  r=*q;
+  while((r->next)!=NULL)
+    {
+       max=r->data;
+       r=r->next;
+       if((r->data)>max)
+       {
+         max=r->data;
+       }
+    }
+  printf("The max is %d",max);  
+  printf("\n");
+}
+
+int main()
+{
+  struct number *head;
+  create(&head);
+  display(&head);
+  max(&head);
+}
